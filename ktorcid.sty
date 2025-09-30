@@ -1,0 +1,20 @@
+%% Copyright (c) 2025 mangalbhaskar. All Rights Reserved.
+%% __author__ = 'mangalbhaskar'
+%% ----------------------------------------------------------
+%% ktorcid for ORCID icon and author linking
+%% ----------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ktorcid}[2025/05/29 v0.0.1 KTBox framework: ORCID author utilities]
+
+\RequirePackage{hyperref}
+\RequirePackage{orcidlink}
+
+%% Full ORCID hyperlink text
+\newcommand{\orcid}[1]{%
+  \href{https://orcid.org/#1}{ORCID:~#1}%
+}
+
+%% Small superscript ORCID icon (preferred in author lists)
+\newcommand{\orcidicon}[1]{%
+  \textsuperscript{\orcidlink{#1}}%
+}
