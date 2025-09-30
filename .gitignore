@@ -1,0 +1,272 @@
+## Copyright (c) 2025 mangalbhaskar. All Rights Reserved.
+## __author__ = 'mangalbhaskar'
+###----------------------------------------------------------
+## disallow files/folders in same directory as the .gitignore file
+###----------------------------------------------------------
+#
+## References:
+## * https://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
+###----------------------------------------------------------
+
+/*
+
+## allow some files
+!.dockerignore
+!.gitattributes
+!.nojekyll
+!.gitignore
+!.gitmodules/
+!.husky/
+!.flake8
+!*.cjs
+!*.json
+!.eslintignore
+!.prettierignore
+!.prettierrc
+!.npmrc
+!.pypirc
+!.pylintrc
+##
+!*.md
+!*.adoc
+!*.html
+!*.yml
+!*.yaml
+!*.xml
+!*.sh
+!*.txt
+!*.py
+!*.cfg
+!*.conf
+!*.example
+!*.toml
+!*.env
+!*.in
+!*.ini
+!*.js
+!*.ts
+!*.tex
+!*.sty
+!*.bib
+!*.cls
+!*.bst
+!LICENSE*
+!Dockerfile*
+!package.json
+#
+!apps/
+!assets/
+!docker/
+!**/data
+!demo/
+!dockerfiles/
+!docs/
+!docs-*/
+# !dist/
+# !lib/
+# !include/
+# !tools/
+!e2e/
+!fonts/
+!licenses/
+!requirements/
+# !examples/
+!src/
+!samples/
+!scripts/
+# !external/
+#!src/
+!tests/
+#!reports/
+#!wsgi-bin/
+!lscripts/
+!pyscripts/
+##
+!tables/
+!maths/
+!themes/
+!templates/
+!reviews/
+!notes/
+!images/
+!logos/
+# !posters/
+!figures/
+!datasets/
+!bibtex/
+!data/
+!results/
+!archives/
+
+## AI weights to be excluded
+**/*.pt
+**/*.pth
+**/*.onnx
+**/*.mlmodel
+**/*.torchscript
+**/*.npy
+**/*.npz
+**/*.pkl
+**/*.t7
+**/*.weights
+**/*.h5
+**/*.ckpt
+**/*.ckpt.*
+**/*.ckpt-*
+**/*.tflite
+**/*.pb
+**/*.pbtext
+**/*.pb.tflite
+**/checkpoint
+**/*.hdf5
+**/*.data-*
+**/*.index
+**/*.mlir
+**/*.cvimodel
+**/*.bmodel
+**/*.prototxt
+##
+**/*-lock.*
+**/*.lock
+**/*.~lock*#
+
+## PDF, Images, audios, videos are excluded
+**/*.pdf
+**/*.bmp
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.tif
+**/*.tiff
+**/*.dng
+**/*.gif
+**/*.mp3
+**/*.mov
+**/*.avi
+**/*.mp4
+**/*.mpg
+**/*.mpeg
+**/*.m4v
+**/*.wmv
+**/*.mkv
+**/*.webm
+**/*.flv
+
+## disallow some specific files in the allowed list
+**/*~
+**/*.swp
+**/nohup.*
+**/*.log
+**/*.bk
+**/temp.*
+**/.goutputstream-*
+
+## conventions - these directories not allowed
+**/.cred
+**/.secrets
+**/cache
+**/_site
+**/tmp
+## draw.io temp file
+**/*.dtmp
+# **/config
+**/*-config
+# **/data/*
+**/*-data
+**/logs
+**/virtualenvs
+**/conda
+**/condaenvs
+**/site-packages
+**/venv
+**/mobile
+**/*-mobile
+**/deprecated
+##
+**/blah/
+**/blah*
+
+**/external
+**/local
+**/.local
+**/*.local
+**/*.local.*
+
+**/README.html
+**/node_modules
+**/*.pyc
+**/*__pycache__
+# **/*.py[cod]
+# **/*$py.class
+**/*.ipynb_checkpoints
+**/*.python-version
+**/*.pytest_cache
+**/*.mypy_cache
+**/*.py.*
+**/gradle
+**/captures
+**/screenshot
+blah*
+**/.vscode
+**/.gradle
+**/.cache
+**/-cache
+**/.idea
+**/.externalNativeBuild
+**/*.iml
+**/.DS_Store
+**/.tox
+**/build
+# **/dist
+**/bin
+**/.Trashes
+**/.$
+**/.$*bkp
+
+
+**/Thumbs.db
+**/Desktop.ini
+**/Spotlight-V100
+**/._*
+
+## Jekyll
+**/.sass-cache/
+**/.jekyll-cache/
+**/.jekyll-metadata
+**/vendor
+**/bundle
+**/.vendor
+**/.bundle
+
+## Python egg metadata, regenerated from source files by setuptools.
+**/*.egg-info
+**/*.egg
+**/*.whl
+
+## disallow C extensions
+*.so
+
+## override and allow
+!lscripts/**/config
+#
+!docs/**/*.png
+!docs/**/*.jpg
+!docs/**/*.jpeg
+!docs/**/*.gif
+##
+!data/**/*.mkv
+!data/**/*.mp4
+##
+!**/*.png
+!**/*.jpg
+!**/*.jpeg
+!**/*.gif
+
+!**/data/**/*.yml
+!**/data/**/*.csv
+!**/data/**/*.json
+
+!**/images/**/*.pdf
+!**/samples/**/*.pdf
+!**/figures/**/*.pdf
+!**/logos/**/*.pdf
