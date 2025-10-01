@@ -1,0 +1,186 @@
+%% Copyright (c) 2025 mangalbhaskar. All Rights Reserved.
+%% __author__ = 'mangalbhaskar'
+%% ----------------------------------------------------------
+%% Part of the KTBox framework: taxonomy trees (left-to-right)
+%% -----------------------------------------------------------------
+\ProvidesPackage{ktlrtree}[2025/05/29 v0.0.1 KTBox: Taxonomy trees (L→R)]
+
+\RequirePackage[edges]{forest}
+\RequirePackage{tcolorbox}
+\RequirePackage{varwidth}
+\RequirePackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, fit, positioning, shadows.blur}
+
+%% -----------------------------------------------------------------
+%% Tree Styles
+%% -----------------------------------------------------------------
+
+%% Arrow tree (L→R with forked edges and arrows)
+\forestset{
+  ktlrtree-arrow/.style={
+    for tree={
+      draw,
+      semithick,
+      fill=white,
+      blur shadow,
+      align=left,
+      grow'=0,
+      anchor=west,
+      forked edges,
+      edge={-stealth},
+    }
+  }
+}
+
+%% Plain tree (L→R without arrows, custom edge path)
+\forestset{
+  ktlrtree-plain/.style={
+    for tree={
+      grow'=east,
+      draw,
+      semithick,
+      fill=white,
+      blur shadow,
+      align=left,
+      child anchor=west,
+      parent anchor=east,
+      anchor=west,
+      edge path={
+        \noexpand\path[\forestoption{edge}]
+          (.child anchor) -| +(-5pt,0) -- +(-5pt,0) |-
+          (!u.parent anchor)\forestoption{edge label};
+      }
+    }
+  }
+}
+
+%% Unified arrow tree (rounded corners, consistent spacing)
+\forestset{
+  ktlrtree-arrow-unified/.style={
+    for tree={
+      grow'=0,
+      draw,
+      semithick,
+      rounded corners=0.5mm,
+      parent anchor=east,
+      child anchor=west,
+      anchor=west,
+      fill=white,
+      forked edges,
+      edge={-stealth},
+      s sep=0.8em,
+      tier/.option=level,
+      minimum height=0.8em,
+      minimum width=0.5em,
+    }
+  }
+}
+
+%% -----------------------------------------------------------------
+%% Wrapbox helpers (size variants)
+%% -----------------------------------------------------------------
+
+%% General-purpose wrapper
+\newcommand{\ktwrapbox}[2][9em]{%
+  \begin{tcolorbox}[
+    enhanced,
+    blank,
+    frame hidden,
+    nobeforeafter,
+    width=#1,
+    colframe=transparent,
+    colback=transparent,
+    boxrule=0pt,
+    boxsep=0pt,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    valign=center,
+    halign=center
+  ]
+  #2
+  \end{tcolorbox}%
+}
+
+%% Size variants
+\newcommand{\ktwrapboxxs}[1]{\ktwrapbox[6em]{#1}}
+\newcommand{\ktwrapboxs}[1]{\ktwrapbox[7.5em]{#1}}
+\newcommand{\ktwrapboxm}[1]{\ktwrapbox[9em]{#1}}   %% default
+\newcommand{\ktwrapboxl}[1]{\ktwrapbox[11em]{#1}}
+\newcommand{\ktwrapboxxl}[1]{\ktwrapbox[13em]{#1}}
+\newcommand{\ktwrapboxxxl}[1]{\ktwrapbox[15em]{#1}}
+\newcommand{\ktwrapboxxxxl}[1]{\ktwrapbox[25em]{#1}}
+
+%% -----------------------------------------------------------------
+%% Fusion helpers (for brace grouping and split boxes)
+%% -----------------------------------------------------------------
+
+%% Curly brace + annotation box with adjustable horizontal offset
+%% #1 [opt]  x-offset (default 5pt)
+%% #2        unique ID
+%% #3        from node
+%% #4        to node
+%% #5        annotation content
+\newcommand{\ktcurl}[5][5pt]{%
+  \node (#2box) [fit=(#3)(#4), inner sep=2pt] {};
+
+  \draw [
+    decorate,
+    decoration={brace, amplitude=6pt},
+    thin
+  ]
+    ([xshift=#1]#2box.north east) -- ([xshift=#1]#2box.south east);
+
+  \node (#2) [
+    right=1.9cm of #2box,
+    sharp corners,
+    fill=white,
+    inner sep=0pt,
+    outer sep=0pt,
+    anchor=west
+  ]
+  {#5};
+
+  \draw[->, thin, dashed]
+    ([xshift=\dimexpr #1 + 10pt\relax]#2box.east) -- (#2.west);
+}
+
+%% Split fusion box (side-by-side comparison, equal height + spacing)
+\newcommand{\ktfusionboxsplit}[2]{%
+  \begin{tcolorbox}[
+    enhanced,
+    frame hidden,
+    nobeforeafter,
+    breakable,
+    width=14.5em,
+    colframe=transparent,
+    colback=ktgreen-bg,
+    boxrule=0pt,
+    left=4pt,
+    right=4pt,
+    top=4pt,
+    bottom=6pt,
+    equal height group=fusion
+  ]
+    #1
+  \end{tcolorbox}
+  \hspace{1.0em}
+  \begin{tcolorbox}[
+    enhanced,
+    frame hidden,
+    nobeforeafter,
+    breakable,
+    width=14.5em,
+    colframe=transparent,
+    colback=ktred-bg,
+    boxrule=0pt,
+    left=4pt,
+    right=4pt,
+    top=4pt,
+    bottom=6pt,
+    equal height group=fusion
+  ]
+    #2
+  \end{tcolorbox}
+}
