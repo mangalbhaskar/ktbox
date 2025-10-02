@@ -92,7 +92,7 @@ This compiles the LaTeX manual into a PDF using `latexmk`.
 If building manually, ensure TeX can find the `.sty` files:
 
 ```bash
-TEXINPUTS=./: latexmk -pdf -interaction=nonstopmode main.tex
+TEXINPUTS=./: latexmk -pdf -interaction=nonstopmode ktbox.tex
 ```
 
 ## Maintainer
