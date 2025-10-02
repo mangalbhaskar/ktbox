@@ -10,13 +10,14 @@
 __LSCRIPTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 function build_pdf() {
-  local main_file="${1:-"ktbox.tex"}"
-  local build_dir="build-01-ktbox"
+  local main_file="${1:-"main.tex"}"
+  local base_name=$(basename "${main_file}" .tex)
+  local build_dir="build-01-${base_name}"
   local default_latexmk_config="data/LatexMk"
   local latexmk_config="${2:-$default_latexmk_config}"
   local timestamp=$(date +"%d%m%y_%H%M%S")
-  # local log_file="logs/${timestamp}.build-01-ktbox.log"
-  local log_file="logs/build-01-ktbox.log"
+  # local log_file="logs/${timestamp}.${build_dir}.log"
+  local log_file="logs/${build_dir}.log"
 
   ## Create build and log directories if they don't exist
   [[ ! -d "$build_dir" ]] && mkdir -p "$build_dir"
